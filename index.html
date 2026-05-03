@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lin Shen — Theoretical & Applied Linguistics</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=DM+Mono:wght@400;500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #faf6f0;            /* warm cream */
+    --bg-2: #f3ece1;          /* slightly deeper cream */
+    --ink: #2a2520;           /* warm near-black */
+    --ink-soft: #5b524a;
+    --muted: #8a7f73;
+    --rule: #e6dccd;
+    --paw: #e89968;           /* soft cat-orange accent */
+    --paw-soft: #f3c8a8;
+    --paw-tint: #fbe9d8;
+    --pink: #e9a9a0;
+    --leaf: #9bb191;
+    --radius: 14px;
+    --maxw: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--paw-soft); text-decoration-thickness: 1.5px; text-underline-offset: 3px; transition: text-decoration-color .15s ease, color .15s ease; }
+  a:hover { text-decoration-color: var(--paw); color: var(--paw); }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 36px; }
+
+  /* ---- Top bar ---- */
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; gap: 22px;
+    padding: 14px 0;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 19px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    flex: none;
+  }
+  .brand .paw-logo { width: 26px; height: 26px; flex: none; }
+  nav.menu { margin-left: auto; display: flex; gap: 22px; font-family: 'Nunito', sans-serif; font-size: 14px; flex-wrap: wrap; justify-content: flex-end; }
+  nav.menu a { text-decoration: none; color: var(--ink-soft); }
+  nav.menu a:hover { color: var(--paw); }
+
+  /* ---- Hero ---- */
+  .hero { padding: 72px 0 36px; position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: start; }
+  @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--paw); display: inline-block; }
+
+  h1.name {
+    font-family: 'Fraunces', serif;
+    font-weight: 360;
+    font-variation-settings: "SOFT" 50, "WONK" 0;
+    font-size: clamp(48px, 7vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 16px 0 6px;
+  }
+  h1.name em { font-style: italic; font-variation-settings: "SOFT" 80; color: var(--paw); }
+
+  .role {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+  }
+
+  .bio { font-size: 19px; color: var(--ink); max-width: 58ch; line-height: 1.6; }
+  .bio p { margin: 0 0 18px; text-wrap: pretty; }
+  .bio p:last-child { margin-bottom: 0; }
+
+  .links-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 22px;
+    font-family: 'Nunito', sans-serif;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 12px;
+    border: 1px solid var(--rule);
+    background: #fff;
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: all .15s ease;
+    white-space: nowrap;
+  }
+  .chip:hover { border-color: var(--paw); color: var(--paw); transform: translateY(-1px); }
+  .chip svg { width: 14px; height: 14px; }
+
+  /* ---- Hero portrait card ---- */
+  .portrait-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 22px;
+    position: relative;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 18px 40px -28px rgba(80,60,30,0.15);
+  }
+  .portrait-card::before {
+    /* tape */
+    content: '';
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+    width: 76px; height: 22px;
+    background: color-mix(in oklab, var(--paw) 35%, white);
+    opacity: 0.55;
+    border-radius: 2px;
+  }
+  .portrait {
+    aspect-ratio: 4/5;
+    border-radius: 8px;
+    background: var(--bg-2) center/cover no-repeat;
+    background-image: url('assets/lin.jpg');
+    overflow: hidden;
+    position: relative;
+  }
+  .portrait-meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .portrait-meta .name-mini { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: 0; white-space: nowrap; }
+  .portrait-meta > span:last-child { white-space: nowrap; }
+
+  /* peeking cat */
+  .peek-cat {
+    position: absolute;
+    right: -14px; bottom: -22px;
+    width: 86px; height: auto;
+    pointer-events: none;
+    transform-origin: bottom center;
+  }
+  .peek-cat .tail { transform-origin: 50% 80%; animation: tailWag 3.6s ease-in-out infinite; }
+  @keyframes tailWag {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(8deg); }
+  }
+
+  /* ---- Section shell ---- */
+  section.block { padding: 60px 0; border-top: 1px solid var(--rule); position: relative; }
+  .section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 32px;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--muted); letter-spacing: 0.08em;
+  }
+  h2 {
+    font-family: 'Fraunces', serif; font-weight: 380;
+    font-size: clamp(30px, 3.6vw, 42px);
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.1;
+  }
+  h2 .accent { color: var(--paw); font-style: italic; font-variation-settings: "SOFT" 80; }
+
+  .lede {
+    font-family: 'Newsreader', serif;
+    font-size: 19px; color: var(--ink-soft); max-width: 62ch;
+    margin-top: 8px; text-wrap: pretty;
+  }
+
+  /* ---- Research interests ---- */
+  .interests {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+  }
+  @media (max-width: 700px) { .interests { grid-template-columns: 1fr; } }
+  .interest {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .interest:hover { transform: translateY(-2px); border-color: var(--paw-soft); }
+  .interest .ico {
+    width: 38px; height: 38px; flex: none;
+    border-radius: 10px;
+    background: var(--paw-tint);
+    display: grid; place-items: center;
+    color: var(--paw);
+  }
+  .interest h3 {
+    margin: 0 0 4px;
+    font-family: 'Fraunces', serif; font-weight: 460;
+    font-size: 18px;
+  }
+  .interest p { margin: 0; font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ---- Publications ---- */
+  .pub-list { list-style: none; padding: 0; margin: 0; }
+  .pub {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px dashed var(--rule);
+    align-items: baseline;
+  }
+  .pub:last-child { border-bottom: none; }
+  .pub .year {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px; color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .pub .title {
+    font-family: 'Newsreader', serif;
+    font-size: 17.5px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .pub .title .pub-authors { color: var(--ink-soft); font-style: italic; }
+  .pub .venue {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.01em;
+  }
+  .pub .venue em { color: var(--ink-soft); font-style: italic; }
+  .pub .doi {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--paw);
+    text-decoration: none;
+    white-space: nowrap;
+    border: 1px solid var(--paw-soft);
+    padding: 4px 9px;
+    border-radius: 999px;
+    transition: all .15s ease;
+  }
+  .pub .doi:hover { background: var(--paw); color: white; border-color: var(--paw); }
+
+  .pub-tabs {
+    display: inline-flex; gap: 4px;
+    padding: 4px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    margin-bottom: 22px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+  }
+  .pub-tabs button {
+    border: 0; background: transparent;
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-family: inherit; font-size: inherit;
+  }
+  .pub-tabs button.active { background: var(--ink); color: var(--bg); }
+
+  /* ---- Education timeline ---- */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 8px; top: 6px; bottom: 6px;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--paw-soft) 0 4px, transparent 4px 10px);
+  }
+  .tl-item { position: relative; padding: 6px 0 26px; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -24px; top: 14px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--paw);
+  }
+  .tl-item.current::before {
+    background: var(--paw);
+    box-shadow: 0 0 0 4px var(--paw-tint);
+  }
+  .tl-when {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .tl-what {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 460;
+    margin: 4px 0 4px;
+  }
+  .tl-where {
+    font-family: 'Newsreader', serif; font-style: italic;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .tl-extra { font-size: 14.5px; color: var(--muted); margin-top: 6px; max-width: 60ch; }
+
+  /* ---- Two column wrap ---- */
+  .two-col { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; gap: 36px; } }
+
+  .stack-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .stack-card h4 {
+    font-family: 'Fraunces', serif; font-weight: 480;
+    font-size: 16px;
+    margin: 0 0 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .stack-card ul { list-style: none; padding: 0; margin: 0; }
+  .stack-card li {
+    font-family: 'Newsreader', serif;
+    font-size: 15.5px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--rule);
+    display: flex; justify-content: space-between; gap: 16px;
+  }
+  .stack-card li:last-child { border-bottom: none; }
+  .stack-card li .meta { color: var(--muted); font-family: 'DM Mono', monospace; font-size: 12px; }
+
+  /* paw bullets */
+  .paw-list { list-style: none; padding: 0; margin: 0; }
+  .paw-list li {
+    position: relative;
+    padding: 6px 0 6px 26px;
+    font-size: 16px;
+  }
+  .paw-list li::before {
+    content: '';
+    position: absolute; left: 0; top: 12px;
+    width: 14px; height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e89968'><circle cx='12' cy='15' r='4.5'/><circle cx='5' cy='10' r='2.2'/><circle cx='19' cy='10' r='2.2'/><circle cx='9' cy='6' r='2'/><circle cx='15' cy='6' r='2'/></svg>");
+    background-repeat: no-repeat; background-size: contain;
+  }
+
+  /* ---- Contact ---- */
+  .contact-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-card .lookup {
+    position: absolute; right: -10px; bottom: -16px; width: 130px; opacity: 0.9;
+    pointer-events: none;
+  }
+  .contact-card h3 {
+    font-family: 'Fraunces', serif; font-weight: 380; font-size: 28px;
+    margin: 0 0 6px; letter-spacing: -0.01em;
+  }
+  .contact-card p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+  .email-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    background: var(--ink); color: var(--bg);
+    padding: 12px 18px; border-radius: 10px;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background .15s ease;
+  }
+  .email-btn:hover { background: var(--paw); color: var(--bg); }
+
+  /* ---- Footer ---- */
+  footer {
+    padding: 36px 0 60px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  footer .heart { color: var(--paw); }
+
+  /* ---- Cute level toggle effects ---- */
+  body[data-cute="minimal"] .peek-cat,
+  body[data-cute="minimal"] .corner-cat,
+  body[data-cute="minimal"] .pawprint-divider,
+  body[data-cute="minimal"] .contact-card .lookup { display: none !important; }
+  body[data-cute="minimal"] .paw-list li::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><circle cx='4' cy='4' r='2.4' fill='%23e89968'/></svg>");
+  }
+  body[data-cute="playful"] .corner-cat { opacity: 1 !important; }
+
+  /* divider */
+  .pawprint-divider {
+    display: flex; justify-content: center; align-items: center; gap: 14px;
+    padding: 6px 0;
+    color: var(--paw-soft);
+  }
+  .pawprint-divider svg { width: 14px; height: 14px; }
+
+  /* corner cats watching together */
+  .corner-cat {
+    position: fixed; bottom: 14px; left: 14px;
+    pointer-events: none; z-index: 5;
+    display: flex; align-items: flex-end; gap: -10px;
+  }
+  .corner-cat .corner-shorty { width: 78px; position: relative; z-index: 2; }
+  .corner-cat .corner-floof { width: 92px; margin-left: -32px; position: relative; z-index: 1; opacity: 0.96; }
+  .corner-cat .eye-l, .corner-cat .eye-r,
+  .corner-cat .floof-eye-l, .corner-cat .floof-eye-r { transform-origin: center; transition: transform .12s ease-out; }
+
+  /* Tweaks default colors */
+  body[data-accent="paw"] { --paw: #e89968; --paw-soft: #f3c8a8; --paw-tint: #fbe9d8; }
+  body[data-accent="rose"] { --paw: #d97a8f; --paw-soft: #f0c1cd; --paw-tint: #fbe4ea; }
+  body[data-accent="moss"] { --paw: #7a9a6e; --paw-soft: #c4d3bb; --paw-tint: #e7eede; }
+  body[data-accent="ink"] { --paw: #4d6a8a; --paw-soft: #b8c8d8; --paw-tint: #e1e9f0; }
+
+  /* Selection */
+  ::selection { background: var(--paw-soft); color: var(--ink); }
+</style>
+</head>
+<body data-cute="balanced" data-accent="paw">
+
+  <!-- Sticky topbar -->
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <svg class="paw-logo" viewBox="0 0 24 24" fill="currentColor" style="color: var(--paw)">
+          <circle cx="12" cy="15" r="4.5"/>
+          <circle cx="5" cy="10" r="2.2"/>
+          <circle cx="19" cy="10" r="2.2"/>
+          <circle cx="9" cy="6" r="2"/>
+          <circle cx="15" cy="6" r="2"/>
+        </svg>
+        <span>Lin Shen</span>
+      </div>
+      <nav class="menu">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="wrap">
+    <section class="hero" id="about">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>PhD Researcher · Cambridge</span>
+          <h1 class="name">Lin <em>Shen</em></h1>
+          <p class="role">沈琳 · Theoretical & Applied Linguistics</p>
+
+          <div class="bio">
+            <p>Lin is a PhD student in <strong>Theoretical and Applied Linguistics</strong> at the University of Cambridge. Before beginning her doctoral studies in October 2024, she earned a master's degree in Translation Studies from <em>Beijing Foreign Studies University</em> (2021–2024) and a bachelor's degree in Translation from <em>Guangdong University of Foreign Studies</em> (2017–2021).</p>
+            <p>She is fascinated by translation and second language acquisition, and enjoys analysing both translated texts and learner language from sociocultural and cognitive perspectives. More broadly, she is interested in how translation and L2 acquisition shape and reflect society, culture, and cognition.</p>
+          </div>
+
+          <div class="links-row">
+            <a class="chip" href="mailto:ls2098@cam.ac.uk">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg>
+              ls2098@cam.ac.uk
+            </a>
+            <a class="chip" href="https://www.mmll.cam.ac.uk/people/lin-shen" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M12 4a14 14 0 010 16M12 4a14 14 0 000 16"/><circle cx="12" cy="12" r="9"/></svg>
+              Cambridge MMLL
+            </a>
+            <a class="chip" href="https://orcid.org/0000-0002-7191-3064" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><text x="12" y="16" text-anchor="middle" font-size="9" font-family="serif" font-style="italic">iD</text></svg>
+              ORCID
+            </a>
+            <a class="chip" href="https://www.researchgate.net/profile/Lin-Shen-43/research" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h6a4 4 0 010 8H4zM4 12l8 8"/></svg>
+              ResearchGate
+            </a>
+            <a class="chip" href="https://www.linkedin.com/in/lin-shen-14576a31a" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="9" r="1.2"/><path d="M7 11.5h2v6h-2zM11 11.5h2v1c.5-.8 1.5-1.2 2.5-1.2 2 0 2.5 1.4 2.5 3.2v3h-2v-2.7c0-1-.4-1.5-1.2-1.5s-1.3.6-1.3 1.5v2.7h-2.5z" fill="currentColor"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <!-- Portrait card -->
+        <aside class="portrait-card">
+          <div class="portrait" id="portrait" role="img" aria-label="Lin Shen with a camera in Santorini"></div>
+          <div class="portrait-meta">
+            <span class="name-mini">Lin Shen · 沈琳</span>
+            <span>2024 — </span>
+          </div>
+          <!-- peeking cat: Cat #1 — short-haired white & grey, chunky -->
+          <svg class="peek-cat cat-shorty" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g class="tail">
+              <path d="M86 78 q18 -4 16 -26 q-2 -10 -12 -8" fill="none" stroke="#3a342d" stroke-width="2.4" stroke-linecap="round"/>
+            </g>
+            <!-- chunky body -->
+            <ellipse cx="55" cy="88" rx="40" ry="22" fill="#fbfaf6" stroke="#3a342d" stroke-width="2"/>
+            <!-- round head -->
+            <path d="M20 64 Q20 28 55 28 Q90 28 90 64 Q90 78 75 80 Q55 84 35 80 Q20 78 20 64 Z" fill="#fbfaf6" stroke="#3a342d" stroke-width="2" stroke-linejoin="round"/>
+            <!-- grey patch on head/forehead (signature marking) -->
+            <path d="M30 32 Q26 26 30 22 L40 28 Q48 22 56 24 Q60 18 68 22 L72 30 Q80 28 80 36 Q80 46 72 48 L36 48 Q28 44 30 32 Z" fill="#b8b5b0" opacity="0.85"/>
+            <!-- ears (grey outer) -->
+            <path d="M26 36 L22 16 L40 28 Z" fill="#b8b5b0" stroke="#3a342d" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M84 36 L88 16 L70 28 Z" fill="#b8b5b0" stroke="#3a342d" stroke-width="2" stroke-linejoin="round"/>
+            <!-- inner ears pink -->
+            <path d="M28 32 L26 20 L36 30 Z" fill="#f0b5a8"/>
+            <path d="M82 32 L84 20 L74 30 Z" fill="#f0b5a8"/>
+            <!-- big round eyes (yellow-green) -->
+            <ellipse cx="40" cy="54" rx="5" ry="5.5" fill="#c8c39a"/>
+            <ellipse cx="68" cy="54" rx="5" ry="5.5" fill="#c8c39a"/>
+            <ellipse cx="40" cy="54" rx="1.2" ry="4" fill="#2a2520"/>
+            <ellipse cx="68" cy="54" rx="1.2" ry="4" fill="#2a2520"/>
+            <circle cx="41" cy="52" r="0.8" fill="#fff"/>
+            <circle cx="69" cy="52" r="0.8" fill="#fff"/>
+            <!-- pink triangle nose -->
+            <path d="M52 64 L56 64 L54 67 Z" fill="#f0b5a8" stroke="#3a342d" stroke-width="0.6"/>
+            <!-- mouth -->
+            <path d="M54 67 V70 M54 70 Q50 72 48 70 M54 70 Q58 72 60 70" fill="none" stroke="#3a342d" stroke-width="1.4" stroke-linecap="round"/>
+            <!-- whiskers -->
+            <path d="M30 62 L18 60 M30 65 L18 67 M78 62 L92 60 M78 65 L92 67" stroke="#3a342d" stroke-width="0.7" stroke-linecap="round" fill="none" opacity="0.6"/>
+          </svg>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Research -->
+    <section class="block" id="research">
+      <div class="section-head">
+        <span class="section-num">01 / Research</span>
+      </div>
+      <h2>What I think <span class="accent">about</span></h2>
+      <p class="lede">My doctoral thesis — <em>Constrained communication of motion events: Mediation, typological proximity, and proficiency</em> — sits at the intersection of bilingual cognition, translation studies, and language acquisition.</p>
+
+      <div style="height: 28px"></div>
+
+      <div class="interests">
+        <div class="interest">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg>
+          </div>
+          <div>
+            <h3>Second Language Acquisition</h3>
+            <p>How learners come to express motion, manner, and path in a typologically distant L2 — and what their detours reveal.</p>
+          </div>
+        </div>
+        <div class="interest">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/></svg>
+          </div>
+          <div>
+            <h3>Cognitive Linguistics</h3>
+            <p>Thinking-for-speaking, conceptual transfer, and the cognitive load of moving meaning across typologies.</p>
+          </div>
+        </div>
+        <div class="interest">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8M8 17h5"/></svg>
+          </div>
+          <div>
+            <h3>Corpus Linguistics</h3>
+            <p>Large diachronic and parallel corpora — UN General Debate, political interpreting, learner production — analysed with R and Python.</p>
+          </div>
+        </div>
+        <div class="interest">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 5h7v14H3zM14 5h7v14h-7z"/><path d="M10 12h4"/></svg>
+          </div>
+          <div>
+            <h3>Translation Studies</h3>
+            <p>Constrained communication, mediation effects, and the linguistic fingerprints that distinguish translated from native discourse.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pawprint-divider" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="15" r="4.5"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" style="opacity:.6"><circle cx="12" cy="15" r="4.5"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" style="opacity:.3"><circle cx="12" cy="15" r="4.5"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/></svg>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="block" id="publications">
+      <div class="section-head">
+        <span class="section-num">02 / Selected Work</span>
+      </div>
+      <h2>Publications <span class="accent">&amp;</span> talks</h2>
+      <p class="lede">A selection of journal articles and conference presentations. Full list on <a href="https://orcid.org/0000-0002-7191-3064" target="_blank" rel="noopener">ORCID</a> and <a href="https://www.researchgate.net/profile/Lin-Shen-43/research" target="_blank" rel="noopener">ResearchGate</a>.</p>
+
+      <div style="height: 28px"></div>
+
+      <div class="pub-tabs" id="pubTabs">
+        <button class="active" data-tab="journals">Journal articles</button>
+        <button data-tab="talks">Conference talks</button>
+        <button data-tab="chapters">Book chapters</button>
+      </div>
+
+      <ul class="pub-list" data-pane="journals">
+        <li class="pub">
+          <span class="year">2026</span>
+          <span class="title">
+            Mediation of self-praise in Chinese–English political interpreting: A corpus-based analysis (2000–2022).
+            <span class="venue"><em>Meta: Journal des Traducteurs</em> · forthcoming</span>
+          </span>
+          <span></span>
+        </li>
+        <li class="pub">
+          <span class="year">2026</span>
+          <span class="title">
+            Socio-cognitive correlation between translation attitudes and translation of motion event expressions.
+            <span class="venue">with W. Xie · <em>Vigo International Journal of Applied Linguistics</em>, 23</span>
+          </span>
+          <a class="doi" href="https://doi.org/10.35869/vial.v0i23.6241" target="_blank" rel="noopener">doi ↗</a>
+        </li>
+        <li class="pub">
+          <span class="year">2025</span>
+          <span class="title">
+            Constrained communication of motion events: Shared cognitive constraints in Chinese–French translation and description tasks.
+            <span class="venue"><em>Review of Cognitive Linguistics</em></span>
+          </span>
+          <a class="doi" href="https://doi.org/10.1075/rcl.00218.she" target="_blank" rel="noopener">doi ↗</a>
+        </li>
+        <li class="pub">
+          <span class="year">2025</span>
+          <span class="title">
+            Thinking-for-translating of manner beyond the motion domain: Directionality and proficiency in Chinese–English translation.
+            <span class="venue"><em>Target: International Journal of Translation Studies</em></span>
+          </span>
+          <a class="doi" href="https://doi.org/10.1075/target.25007.she" target="_blank" rel="noopener">doi ↗</a>
+        </li>
+        <li class="pub">
+          <span class="year">2025</span>
+          <span class="title">
+            Linguistic indicators differentiating translated and untranslated diplomatic discourse: A diachronic analysis of the UN General Debate (1946–2022).
+            <span class="venue">with H. Kotze · <em>Lingua</em>, 320, 103933</span>
+          </span>
+          <a class="doi" href="https://doi.org/10.1016/j.lingua.2025.103933" target="_blank" rel="noopener">doi ↗</a>
+        </li>
+        <li class="pub">
+          <span class="year">2024</span>
+          <span class="title">
+            Typological differences and cognitive load in manner processing: A corpus-based study of Chinese–English consecutive interpreting.
+            <span class="venue"><em>Language and Cognition</em></span>
+          </span>
+          <a class="doi" href="https://doi.org/10.17863/CAM.113999" target="_blank" rel="noopener">doi ↗</a>
+        </li>
+        <li class="pub">
+          <span class="year">2023</span>
+          <span class="title">
+            Culture and explicitness of persuasion: Linguistic evidence from a 51-year corpus-based cross-cultural comparison of UN General Debate speeches across 55 countries (1970–2020).
+            <span class="venue"><em>Cross-Cultural Research</em>, 57(2), 166–192</span>
+          </span>
+          <a class="doi" href="https://doi.org/10.1177/10693971221139523" target="_blank" rel="noopener">doi ↗</a>
+        </li>
+        <li class="pub">
+          <span class="year">2023</span>
+          <span class="title">
+            LIWC indicators of cross-country income inequality at the UN General Debate (1987–2020): An elastic net analysis.
+            <span class="venue"><em>Journal of Language and Social Psychology</em></span>
+          </span>
+          <a class="doi" href="https://doi.org/10.1177/0261927X231190861" target="_blank" rel="noopener">doi ↗</a>
+        </li>
+        <li class="pub">
+          <span class="year">2023</span>
+          <span class="title">
+            Referential explicitation of English translated diplomatic discourse? A 50-year, 56-lingual corpus-based study on UN General Debate speeches (1970–2019).
+            <span class="venue"><em>Across Languages and Cultures</em>, 24(1), 25–51</span>
+          </span>
+          <a class="doi" href="https://doi.org/10.1556/084.2023.00330" target="_blank" rel="noopener">doi ↗</a>
+        </li>
+        <li class="pub">
+          <span class="year">2022</span>
+          <span class="title">
+            Points of view and readers' immersion in translation: A neurocognitive interpretation of poetic translatability.
+            <span class="venue">with Q. Chen, S. Ochs, K. Xiao · <em>Frontiers in Psychology</em>, 13</span>
+          </span>
+          <a class="doi" href="https://www.frontiersin.org/articles/10.3389/fpsyg.2022.877150" target="_blank" rel="noopener">link ↗</a>
+        </li>
+      </ul>
+
+      <ul class="pub-list" data-pane="talks" hidden>
+        <li class="pub"><span class="year">2025</span><span class="title">Bridging constrained communication and cognitive semantics: Elicitation approaches in Chinese–French translation and L2 production.<span class="venue">58th Annual Meeting of the Societas Linguistica Europaea · Bordeaux, France</span></span><span></span></li>
+        <li class="pub"><span class="year">2025</span><span class="title">Cognitive effects of L1 use via translation tasks in L2 classrooms.<span class="venue">58th Annual Conference of British Association for Applied Linguistics · Glasgow, UK</span></span><span></span></li>
+        <li class="pub"><span class="year">2025</span><span class="title">Typological differences and cognitive load in manner processing.<span class="venue">Corpus Linguistics 2025 · Birmingham, UK</span></span><span></span></li>
+        <li class="pub"><span class="year">2025</span><span class="title">Source text influence on target-likeness of translated motion event expressions.<span class="venue">with H. Hendriks · Language Sciences Annual Symposium · Cambridge, UK</span></span><a class="doi" href="https://doi.org/10.33774/coe-2025-wnd00" target="_blank" rel="noopener">doi ↗</a></li>
+        <li class="pub"><span class="year">2025</span><span class="title">Differentiating translated and non-translated English diplomatic discourse.<span class="venue">with H. Kotze · 46th ICAME · Vilnius, Lithuania</span></span><span></span></li>
+        <li class="pub"><span class="year">2023</span><span class="title">Linguistic analysis of the scarcity mindset: A corpus-based LIWC study of the UN General Debate.<span class="venue">16th International Cognitive Linguistics Conference · Düsseldorf, Germany</span></span><span></span></li>
+        <li class="pub"><span class="year">2023</span><span class="title">Questioning the East/West politeness divide by language-anchored regrouping.<span class="venue">18th International Pragmatics Conference · Brussels, Belgium</span></span><span></span></li>
+        <li class="pub"><span class="year">2023</span><span class="title">"Tao" of colouring covers of translations of Chinese literary classics.<span class="venue">TAC Annual Conference · Beijing, China</span></span><span></span></li>
+        <li class="pub"><span class="year">2023</span><span class="title">How Booker and Nobel prizes shape the circulation of <em>The Remains of the Day</em> in China.<span class="venue">57th Annual Comparative World Literature Conference · California, USA</span></span><span></span></li>
+        <li class="pub"><span class="year">2022</span><span class="title">An integrated perspective of reception in and out of the Red Mansion.<span class="venue">10th APTIF · Beijing, China</span></span><span></span></li>
+      </ul>
+
+      <ul class="pub-list" data-pane="chapters" hidden>
+        <li class="pub"><span class="year">2021</span><span class="title">Multilingual risk communication: Reflection on the Chinese practice during COVID-19 outbreak and policy recommendations.<span class="venue">with Li, Zhu, Chen, Wang, Qiao · <em>The Humanistic Thinking on Epidemic Disease</em>, Science Press, Beijing</span></span><span></span></li>
+        <li class="pub"><span class="year">2021</span><span class="title">Communicating China's COVID-19 prevention experience to the world.<span class="venue">with Li, Zhu, Chen · <em>Research on Creative Communication of Chinese Stories</em>, People's Publishing House</span></span><span></span></li>
+      </ul>
+    </section>
+
+    <!-- Education + Skills -->
+    <section class="block" id="education">
+      <div class="section-head">
+        <span class="section-num">03 / Background</span>
+      </div>
+      <h2>Education <span class="accent">&amp;</span> toolbox</h2>
+
+      <div style="height: 28px"></div>
+
+      <div class="two-col">
+        <!-- Education timeline -->
+        <div>
+          <div class="timeline">
+            <div class="tl-item current">
+              <div class="tl-when">2024 — 2027</div>
+              <div class="tl-what">Ph.D., Theoretical &amp; Applied Linguistics</div>
+              <div class="tl-where">University of Cambridge</div>
+              <div class="tl-extra">Thesis: <em>Constrained communication of motion events — mediation, typological proximity, and proficiency.</em></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-when">2021 — 2024</div>
+              <div class="tl-what">M.A., Translation Studies</div>
+              <div class="tl-where">Beijing Foreign Studies University</div>
+              <div class="tl-extra">GPA 3.84 · Ranked 2/15 · Thesis on syntactic simplification in diplomatic translation, a diachronic five-lingual corpus study of the UN General Debate (1946–2022).</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-when">2017 — 2021</div>
+              <div class="tl-what">B.A., Translation</div>
+              <div class="tl-where">Guangdong University of Foreign Studies</div>
+              <div class="tl-extra">GPA 3.90 · Ranked 1/62 · Diachronic corpus-driven multi-dimensional study of English translations of China's diplomatic discourse (1971–2018).</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-when">Summer 2023</div>
+              <div class="tl-what">Dream Lab — East Asian Studies &amp; Digital Humanities</div>
+              <div class="tl-where">University of Pennsylvania</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-when">Summer 2019</div>
+              <div class="tl-what">National Summer School on Corpus-Based Translation Studies</div>
+              <div class="tl-where">Shanghai International Studies University</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side cards -->
+        <div style="display: grid; gap: 18px; align-content: start;">
+          <div class="stack-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--paw)" stroke-width="2" stroke-linecap="round"><path d="M3 12h3l3-7 4 14 3-9 2 5h3"/></svg>
+              Languages
+            </h4>
+            <ul>
+              <li>Mandarin · Hakka<span class="meta">native</span></li>
+              <li>English<span class="meta">IELTS 8.0 · CATTI 2</span></li>
+              <li>French<span class="meta">research</span></li>
+              <li>German<span class="meta">research</span></li>
+            </ul>
+          </div>
+
+          <div class="stack-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--paw)" stroke-width="2" stroke-linecap="round"><polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/></svg>
+              Toolbox
+            </h4>
+            <ul class="paw-list">
+              <li>Python · NLTK, spaCy, NSCA</li>
+              <li>R · ggplot2, glmnet, lme4</li>
+              <li>MAXQDA · thematic coding</li>
+              <li>LaTeX · academic typesetting</li>
+              <li>Corpus methods · diachronic, parallel, learner</li>
+            </ul>
+          </div>
+
+          <div class="stack-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--paw)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="5"/><path d="M5 21v-1a7 7 0 0114 0v1"/></svg>
+              Service &amp; teaching
+            </h4>
+            <ul>
+              <li>Vice-President, Wolfson College SA<span class="meta">2025–26</span></li>
+              <li>Supervisor, Language Acquisition (Li15)<span class="meta">Cambridge</span></li>
+              <li>Reviewer, <em>Lingua</em>, <em>Across Languages &amp; Cultures</em><span class="meta">2024–25</span></li>
+              <li>Co-organiser, CamPAL group<span class="meta">Cambridge</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="block" id="contact">
+      <div class="section-head">
+        <span class="section-num">04 / Say hi</span>
+      </div>
+      <h2>Get in <span class="accent">touch</span></h2>
+      <p class="lede">Always happy to chat about translation, motion events, learner corpora, or pretty much anything bilingual cognition-flavoured. Cats also welcome.</p>
+
+      <div style="height: 28px"></div>
+
+      <div class="contact-card">
+        <div>
+          <h3>Drop a line</h3>
+          <p>Best reached by email. I usually reply within a few days — unless I'm chasing a corpus deadline.</p>
+        </div>
+        <a class="email-btn" href="mailto:ls2098@cam.ac.uk">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg>
+          ls2098@cam.ac.uk
+        </a>
+
+        <!-- floofy cat #2: long-haired, sleepy, blue eyes, tabby markings -->
+        <svg class="lookup cat-floof" viewBox="0 0 130 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- floofy mane (irregular fluff outline) -->
+          <path d="M14 80 Q8 60 18 48 Q14 32 28 28 Q34 14 50 22 Q58 10 70 20 Q82 12 92 24 Q108 26 108 44 Q120 56 114 76 Q120 88 108 96 Q98 108 80 102 Q66 110 50 100 Q34 108 22 96 Q10 92 14 80 Z"
+            fill="#f6f4ee" stroke="#3a342d" stroke-width="1.8" stroke-linejoin="round"/>
+          <!-- inner face area -->
+          <path d="M40 56 Q40 36 64 36 Q88 36 88 56 Q88 72 78 78 Q64 84 50 78 Q40 72 40 56 Z" fill="#fbfaf6" stroke="#3a342d" stroke-width="1.4"/>
+          <!-- tabby markings on forehead -->
+          <path d="M58 38 Q60 44 64 44 Q68 44 70 38" fill="none" stroke="#9a958c" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M54 42 L56 48 M62 40 L62 48 M66 40 L66 48 M72 42 L70 48" stroke="#9a958c" stroke-width="1.4" stroke-linecap="round"/>
+          <!-- ears tucked into floof -->
+          <path d="M44 34 L42 22 L54 32 Z" fill="#9a958c" stroke="#3a342d" stroke-width="1.4"/>
+          <path d="M84 34 L86 22 L74 32 Z" fill="#9a958c" stroke="#3a342d" stroke-width="1.4"/>
+          <path d="M46 32 L44 24 L50 30 Z" fill="#f0b5a8"/>
+          <path d="M82 32 L84 24 L78 30 Z" fill="#f0b5a8"/>
+          <!-- sleepy half-closed blue eyes -->
+          <path d="M50 58 Q54 54 58 58" fill="none" stroke="#3a342d" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M70 58 Q74 54 78 58" fill="none" stroke="#3a342d" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="54" cy="60" rx="2.4" ry="1.8" fill="#9bb8c8"/>
+          <ellipse cx="74" cy="60" rx="2.4" ry="1.8" fill="#9bb8c8"/>
+          <!-- pink nose -->
+          <path d="M62 66 L66 66 L64 69 Z" fill="#f0b5a8" stroke="#3a342d" stroke-width="0.6"/>
+          <!-- grumpy mouth -->
+          <path d="M64 69 V72 M64 72 Q60 74 58 72 M64 72 Q68 74 70 72" fill="none" stroke="#3a342d" stroke-width="1.4" stroke-linecap="round"/>
+          <!-- whiskers -->
+          <path d="M40 64 L26 62 M40 67 L26 70 M88 64 L102 62 M88 67 L102 70" stroke="#3a342d" stroke-width="0.7" stroke-linecap="round" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Lin Shen · Cambridge</span>
+      <span>made with <span class="heart">♡</span> &amp; cats</span>
+    </footer>
+  </main>
+
+  <!-- floating corner cats: BOTH cats together -->
+  <div class="corner-cat">
+    <!-- shorty (left, in front) -->
+    <svg class="corner-shorty" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="55" cy="100" rx="32" ry="5" fill="rgba(0,0,0,0.08)"/>
+      <ellipse cx="55" cy="86" rx="36" ry="18" fill="#fbfaf6" stroke="#3a342d" stroke-width="1.8"/>
+      <path d="M22 64 Q22 32 55 32 Q88 32 88 64 Q88 78 75 80 Q55 84 35 80 Q22 78 22 64 Z" fill="#fbfaf6" stroke="#3a342d" stroke-width="1.8" stroke-linejoin="round"/>
+      <!-- grey forehead patch -->
+      <path d="M30 36 Q26 28 32 24 L42 30 Q50 24 56 26 Q62 22 70 26 L74 32 Q82 32 80 40 Q78 48 70 48 L36 48 Q28 46 30 36 Z" fill="#b8b5b0" opacity="0.85"/>
+      <!-- ears -->
+      <path d="M26 38 L22 18 L40 30 Z" fill="#b8b5b0" stroke="#3a342d" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M84 38 L88 18 L70 30 Z" fill="#b8b5b0" stroke="#3a342d" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M28 34 L26 22 L36 30 Z" fill="#f0b5a8"/>
+      <path d="M82 34 L84 22 L74 30 Z" fill="#f0b5a8"/>
+      <!-- yellow-green eyes that follow cursor -->
+      <ellipse cx="42" cy="56" rx="5" ry="5.5" fill="#c8c39a"/>
+      <ellipse cx="68" cy="56" rx="5" ry="5.5" fill="#c8c39a"/>
+      <ellipse class="eye-l" cx="42" cy="56" rx="1.4" ry="4" fill="#2a2520"/>
+      <ellipse class="eye-r" cx="68" cy="56" rx="1.4" ry="4" fill="#2a2520"/>
+      <path d="M52 66 L58 66 L55 69 Z" fill="#f0b5a8" stroke="#3a342d" stroke-width="0.6"/>
+      <path d="M55 69 V72 M55 72 Q51 74 49 72 M55 72 Q59 74 61 72" fill="none" stroke="#3a342d" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M30 64 L18 62 M30 67 L18 69 M80 64 L92 62 M80 67 L92 69" stroke="#3a342d" stroke-width="0.7" stroke-linecap="round" fill="none" opacity="0.6"/>
+    </svg>
+    <!-- floofy (right, slightly back & smaller) -->
+    <svg class="corner-floof" viewBox="0 0 130 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="65" cy="104" rx="40" ry="5" fill="rgba(0,0,0,0.06)"/>
+      <path d="M14 84 Q6 64 18 50 Q12 32 30 28 Q36 14 52 22 Q60 10 72 20 Q84 12 94 24 Q112 26 112 46 Q124 60 116 80 Q122 92 110 100 Q98 108 80 104 Q66 110 50 102 Q32 108 22 98 Q8 92 14 84 Z"
+        fill="#f6f4ee" stroke="#3a342d" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M42 58 Q42 38 66 38 Q90 38 90 58 Q90 74 80 80 Q66 86 52 80 Q42 74 42 58 Z" fill="#fbfaf6" stroke="#3a342d" stroke-width="1.2"/>
+      <path d="M60 40 Q62 46 66 46 Q70 46 72 40" fill="none" stroke="#9a958c" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M56 44 L58 50 M64 42 L64 50 M68 42 L68 50 M74 44 L72 50" stroke="#9a958c" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M46 36 L44 24 L56 34 Z" fill="#9a958c" stroke="#3a342d" stroke-width="1.2"/>
+      <path d="M86 36 L88 24 L76 34 Z" fill="#9a958c" stroke="#3a342d" stroke-width="1.2"/>
+      <path d="M48 34 L46 26 L52 32 Z" fill="#f0b5a8"/>
+      <path d="M84 34 L86 26 L80 32 Z" fill="#f0b5a8"/>
+      <path d="M52 60 Q56 56 60 60" fill="none" stroke="#3a342d" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M72 60 Q76 56 80 60" fill="none" stroke="#3a342d" stroke-width="1.4" stroke-linecap="round"/>
+      <ellipse class="floof-eye-l" cx="56" cy="62" rx="2.2" ry="1.6" fill="#9bb8c8"/>
+      <ellipse class="floof-eye-r" cx="76" cy="62" rx="2.2" ry="1.6" fill="#9bb8c8"/>
+      <path d="M64 68 L68 68 L66 71 Z" fill="#f0b5a8" stroke="#3a342d" stroke-width="0.6"/>
+      <path d="M66 71 V74 M66 74 Q62 76 60 74 M66 74 Q70 76 72 74" fill="none" stroke="#3a342d" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M42 66 L28 64 M42 69 L28 72 M90 66 L104 64 M90 69 L104 72" stroke="#3a342d" stroke-width="0.6" stroke-linecap="round" fill="none" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Tweaks -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="tweaks-app.jsx"></script>
+
+  <!-- Vanilla interactions -->
+  <script>
+    // Pub tabs
+    const tabs = document.querySelectorAll('#pubTabs button');
+    tabs.forEach(b => b.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      const tab = b.dataset.tab;
+      document.querySelectorAll('[data-pane]').forEach(p => {
+        p.hidden = p.dataset.pane !== tab;
+      });
+    }));
+
+    // Smooth scroll
+    document.querySelectorAll('nav.menu a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Subtle eye-tracking for both corner cats
+    const cornerCat = document.querySelector('.corner-cat');
+    if (cornerCat) {
+      const allEyes = cornerCat.querySelectorAll('.eye-l, .eye-r, .floof-eye-l, .floof-eye-r');
+      window.addEventListener('mousemove', (e) => {
+        const r = cornerCat.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const dx = (e.clientX - cx) / window.innerWidth;
+        const dy = (e.clientY - cy) / window.innerHeight;
+        const tx = Math.max(-1.4, Math.min(1.4, dx * 3));
+        const ty = Math.max(-1.2, Math.min(1.2, dy * 2));
+        allEyes.forEach(eye => eye.setAttribute('transform', `translate(${tx}, ${ty})`));
+      });
+    }
+  </script>
+</body>
+</html>
